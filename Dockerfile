@@ -36,8 +36,9 @@ ENV EMBEDDING_MODEL=$EMBEDDING_MODEL
 ARG RERANK_MODEL="Qwen/Qwen3-Reranker-4B"
 ENV RERANK_MODEL=$RERANK_MODEL
 
-RUN if [ -n "$EMBEDDING_MODEL" ]; then python -m huggingface_hub download "$EMBEDDING_MODEL"; fi && \
-    if [ -n "$RERANK_MODEL" ]; then python -m huggingface_hub download "$RERANK_MODEL"; fi
+RUN mkdir -p "$HF_HOME" && \
+    if [ -n "$EMBEDDING_MODEL" ]; then uv run python -m huggingface_hub download "$EMBEDDING_MODEL"; fi && \
+    if [ -n "$RERANK_MODEL" ]; then uv run python -m huggingface_hub download "$RERANK_MODEL"; fi
 
 # Copy source and entrypoint
 COPY src/ ./src/
