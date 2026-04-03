@@ -37,8 +37,8 @@ ARG RERANK_MODEL="Qwen/Qwen3-Reranker-4B"
 ENV RERANK_MODEL=$RERANK_MODEL
 
 RUN mkdir -p "$HF_HOME" && \
-    if [ -n "$EMBEDDING_MODEL" ]; then uv run python -m huggingface_hub download "$EMBEDDING_MODEL"; fi && \
-    if [ -n "$RERANK_MODEL" ]; then uv run python -m huggingface_hub download "$RERANK_MODEL"; fi
+    if [ -n "$EMBEDDING_MODEL" ]; then huggingface-cli download "$EMBEDDING_MODEL"; fi && \
+    if [ -n "$RERANK_MODEL" ]; then huggingface-cli download "$RERANK_MODEL"; fi
 
 # Copy source and entrypoint
 COPY src/ ./src/
