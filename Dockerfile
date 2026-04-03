@@ -31,7 +31,11 @@ ENV BASE_PATH=$BASE_PATH \
 # Optional: bake models into the image at build time
 # docker build --build-arg EMBEDDING_MODEL=BAAI/bge-m3 --build-arg RERANK_MODEL=Qwen/Qwen3-Reranker-0.6B .
 ARG EMBEDDING_MODEL="Qwen/Qwen3-Embedding-4B"
+ENV EMBEDDING_MODEL=$EMBEDDING_MODEL
+
 ARG RERANK_MODEL="Qwen/Qwen3-Reranker-4B"
+ENV RERANK_MODEL=$RERANK_MODEL
+
 RUN if [ -n "$EMBEDDING_MODEL" ]; then huggingface-cli download "$EMBEDDING_MODEL"; fi && \
     if [ -n "$RERANK_MODEL" ]; then huggingface-cli download "$RERANK_MODEL"; fi
 
