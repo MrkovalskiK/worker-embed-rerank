@@ -2,7 +2,7 @@
 name = "worker"
 version = "0.1.0"
 description = "RunPod serverless worker with vLLM"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
     "runpod>=1.7",
     "pydantic>=2.0",
