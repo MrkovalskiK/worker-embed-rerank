@@ -8,10 +8,14 @@ class WorkerConfig(BaseSettings):
     max_batch_size: int = 0  # 0 = unlimited
 
     # GPU memory settings — tuned independently per model
-    embedding_gpu_memory_utilization: float = 0.45
+    embedding_gpu_memory_utilization: float = 0.40
     embedding_max_num_seqs: int = 32
+    embedding_max_model_len: int = 8192
+    embedding_quantization: str | None = None
 
-    rerank_gpu_memory_utilization: float = 0.45
+    rerank_gpu_memory_utilization: float = 0.40
     rerank_max_num_seqs: int = 32
+    rerank_max_model_len: int = 8192
+    rerank_quantization: str | None = None
 
     rerank_chat_template: str | None = None

@@ -38,6 +38,8 @@ class EmbeddingEngine(BaseEngine):
             model=self.config.embedding_model,
             gpu_memory_utilization=self.config.embedding_gpu_memory_utilization,
             max_num_seqs=self.config.embedding_max_num_seqs,
+            max_model_len=self.config.embedding_max_model_len,
+            quantization=self.config.embedding_quantization,
         )
 
     def embed(self, texts: list[str]) -> list[list[float]]:
@@ -56,6 +58,8 @@ class ScoringEngine(BaseEngine):
             runner="pooling",
             gpu_memory_utilization=self.config.rerank_gpu_memory_utilization,
             max_num_seqs=self.config.rerank_max_num_seqs,
+            max_model_len=self.config.rerank_max_model_len,
+            quantization=self.config.rerank_quantization,
             hf_overrides={
                 "architectures": ["Qwen3ForSequenceClassification"],
                 "classifier_from_token": ["no", "yes"],
