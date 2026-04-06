@@ -41,8 +41,8 @@ COPY src/ ./src/
 COPY scripts/start.sh ./scripts/start.sh
 
 RUN mkdir -p "$HF_HOME" && \
-    if [ -n "$EMBEDDING_MODEL" ]; then python /app/src/worker/download_model.py --name "$EMBEDDING_MODEL"; fi && \
-    if [ -n "$RERANK_MODEL" ]; then python /app/src/worker/download_model.py --name "$RERANK_MODEL"; fi
+    if [ -n "$EMBEDDING_MODEL" ]; then uv run python /app/src/worker/download_model.py --name "$EMBEDDING_MODEL"; fi && \
+    if [ -n "$RERANK_MODEL" ]; then uv run python /app/src/worker/download_model.py --name "$RERANK_MODEL"; fi
 RUN chmod +x /app/scripts/start.sh
 
 ENV PYTHONPATH=/app/src
