@@ -36,13 +36,13 @@ ENV EMBEDDING_MODEL=$EMBEDDING_MODEL
 ARG RERANK_MODEL="Qwen/Qwen3-Reranker-4B"
 ENV RERANK_MODEL=$RERANK_MODEL
 
-RUN mkdir -p "$HF_HOME" && \
-    if [ -n "$EMBEDDING_MODEL" ]; then huggingface-cli download "$EMBEDDING_MODEL"; fi && \
-    if [ -n "$RERANK_MODEL" ]; then huggingface-cli download "$RERANK_MODEL"; fi
-
 # Copy source and entrypoint
 COPY src/ ./src/
 COPY scripts/start.sh ./scripts/start.sh
+
+RUN mkdir -p "$HF_HOME" && \
+    if [ -n "$EMBEDDING_MODEL" ]; then python /app/src/worker/download_model.py --name "$EMBEDDING_MODEL"; fi && \
+    if [ -n "$RERANK_MODEL" ]; then python /app/src/worker/download_model.py --name "$RERANK_MODEL"; fi
 RUN chmod +x /app/scripts/start.sh
 
 ENV PYTHONPATH=/app/src
